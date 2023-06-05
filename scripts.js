@@ -11,6 +11,8 @@ let didWin = false;
 // } else if (question < compPick) {
 //     document.querySelector("#message").textContent = "Higher"
 // }
+let tries = 10;
+
 
 document.querySelector("#guess").addEventListener("click", function () {
     const userPick = document.querySelector("#text").value;
@@ -18,9 +20,15 @@ document.querySelector("#guess").addEventListener("click", function () {
     if (userPick == compPick) {
         document.querySelector("#message").textContent = "Correct";
         didWin = true;
+        tries -= 1
     } else if (userPick > compPick) {
         document.querySelector("#message").textContent = "Lower"
+        tries -= 1
+        document.querySelector("#win").textContent = tries + " tries left"
     } else if (userPick < compPick) {
         document.querySelector("#message").textContent = "Higher"
+        tries -= 1
+        document.querySelector("#win").textContent = tries + " tries left"
     }
 });
+
