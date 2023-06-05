@@ -1,4 +1,4 @@
-const compPick = Math.floor(Math.random() * 1000) + 1;
+let compPick = Math.floor(Math.random() * 1000) + 1;
 console.log(compPick)
 
 let didWin = false;
@@ -13,8 +13,16 @@ let didWin = false;
 // }
 let tries = 10;
 
+const resetGame = function () {
+    didwin = false;
+    tries = 10;
+    compPick = Math.floor(Math.random() * 1000) + 1;
+    console.log(compPick)
+    document.querySelector("#message").textContent = "You Lost";
+    document.querySelector("#win").textContent = tries + " tries left"
+}
 
-document.querySelector("#guess").addEventListener("click", function () {
+const playGame = function () {
     const userPick = document.querySelector("#text").value;
     console.log("userPick", userPick)
     if (userPick == compPick) {
@@ -30,5 +38,14 @@ document.querySelector("#guess").addEventListener("click", function () {
         tries -= 1
         document.querySelector("#win").textContent = tries + " tries left"
     }
-});
 
+    if (tries <= 0) {
+        resetGame();
+    }
+}
+
+
+document.querySelector("#guess").addEventListener("click", playGame);
+
+
+document.querySelector("#reset").addEventListener("click", resetGame);
